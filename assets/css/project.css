@@ -1,0 +1,1675 @@
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=VT323&display=swap');
+
+/* Base Styles */
+body {
+  margin: 0;
+  padding: 0;
+  background: #fbe4e9;
+  font-family: 'Press Start 2P', cursive;
+}
+
+html, body {
+  overflow: hidden;
+  height: 100%;
+}
+
+
+#game-container {
+  position: relative;  
+  width: 1280px;
+  height: 720px;
+  margin: 50px auto;
+  overflow: hidden;
+  border: 5px solid #aa6c82;
+  background-color: #ffeef4;
+  background-image: url('images/workshop.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* Player Sprite */
+#player {
+  position: absolute; 
+  top: 400px;          
+  left: 200px;         
+  width: 230px;
+  height: 230px;
+  image-rendering: pixelated;
+  z-index: 2;
+}
+
+
+/* Interactable Objects */
+.interactable {
+  position: absolute;
+  width: 100px;
+  height:100px;
+  image-rendering: pixelated;
+  z-index: 1;
+  transition: transform 0.2s;
+}
+
+#scene {
+  transition: opacity 1s ease-out;
+  opacity: 1;
+}
+
+#scene.fade-out {
+  opacity: 0;
+}
+
+@keyframes playerSpawn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+#player.spawn-in {
+  animation: playerSpawn 0.8s ease-out;
+}
+
+
+/* Dialogue Box */
+#dialogue-box {
+  font-size: 14px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+  background: rgba(0, 0, 0, 0.8);
+  color: #ffffff;
+  padding: 10px 14px;
+  border-radius: 8px;
+  width: 450px;
+  min-height: 80px;
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+#wall-text {
+  position: absolute;
+  top: 20px;
+  left: 60px;
+  z-index: 0;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 20px;
+  color: #aa6c82;
+  background: #ffffff;
+  border: 4px solid #aa6c82;
+  padding: 20px;
+  box-shadow:
+    0 0 0 4px #fbe4e9,
+    4px 4px 0 #aa6c82;
+  text-shadow:
+    2px 2px 0 #fbe4e9,
+    4px 4px 10px rgba(170, 108, 130, 0.3); 
+  animation: fadeInUp 1s ease-out forwards;
+  opacity: 0;
+  letter-spacing: 1px;
+    width: 600px;
+  max-width: 90vw;
+  word-wrap: break-word;
+  transition: transform 0.3s ease, color 0.3s ease;
+  display: flex;
+  gap: 10px;
+}
+
+/* Pixel tail (bottom-left corner) */
+#wall-text::after {
+  content: "";
+  position: absolute;
+  bottom: -12px;
+  left: 20px;
+  width: 12px;
+  height: 12px;
+  background: #fff0f5;
+  border-left: 4px solid #aa6c82;
+  border-bottom: 4px solid #aa6c82;
+  box-shadow: 4px 4px 0 #aa6c82;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#wall-text .normal-text {
+  color: #aa6c82;
+}
+
+#wall-text:hover {
+  color: #c3889c;
+  transform: scale(1.05);
+}
+
+#wall-text .highlight {
+  color: #eaa7bf;
+  text-shadow:
+    1px 1px 0 #fff0f5,
+    2px 2px 6px rgba(255, 173, 198, 0.4);
+}
+
+ .back-home-wrapper {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 1000;
+}
+
+.back-home-btn {
+  display: inline-block;
+  background-color: #fdf8dd;
+  color: #5d2a42;
+  text-decoration: none;
+  padding: 0.6rem 1.2rem;
+  border: 2px solid #5d2a42;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  box-shadow: 3px 3px 0 #5d2a42;
+  text-align: center;
+}
+
+.back-home-btn:hover {
+  background-color: #ffe9f3;
+  color: #a23765;
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 #5d2a42;
+}
+
+/* --- Popup Box --- */
+#repair-popup {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 330px;
+  height: 100%;
+  background: #fff7fb;
+  border-left: 4px solid #aa6c82;
+
+  box-shadow: -6px 0 0 #aa6c82, -10px 0 0 #fbe4e9;
+  font-family: 'Press Start 2P', monospace;
+
+  padding: 20px;
+  transform: translateX(100%);
+  transition: transform 0.35s ease-out;
+  z-index: 1000;
+}
+
+#repair-popup.drawer-open {
+  transform: translateX(0);
+}
+
+.popup-inner h1 {
+  font-size: 20px;
+  color: #5d2a42;
+  margin-bottom: 20px;
+}
+
+.popup-item {
+  margin-bottom: 25px;
+}
+
+.popup-btn {
+  font-family: 'Press Start 2P';
+  padding: 10px;
+  margin-top: 10px;
+  border: 3px solid #5d2a42;
+  background: #ffe9f3;
+  width: 100%;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 #5d2a42;
+}
+
+.popup-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 #5d2a42;
+}
+
+.project-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+  background: #ffdce8;
+  border: 2px solid #e6a5c4;
+  border-radius: 10px;
+  padding: 12px;
+  box-shadow: 0 0 6px rgba(255, 170, 210, 0.5);
+}
+
+.project-thumb {
+  width: 90px;
+  height: 80px;
+  image-rendering: pixelated;
+  border: 2px solid #d48db0;
+  border-radius: 6px;
+  background: #ffeff7;
+}
+
+.project-info h2 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.project-info p {
+  margin: 4px 0;
+  font-size: 12px;
+}
+
+.project-btn {
+  margin-top: 4px;
+  font-family: 'Press Start 2P', monospace;
+  background: #ffffff;
+  border: 2px solid #d48db0;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 10px;
+}
+
+.project-btn:hover {
+  background: #ffe0f0;
+}
+
+
+.deco1 { top: -15px; right: -15px; }
+.deco2 { bottom: -15px; left: -15px; }
+
+/* ensure "close" returns to the right side so the closing animation is visible */
+#repair-popup.drawer-close {
+  transform: translateX(100%); /* slide out to the right */
+}
+
+/* hint box positioning helper: keep highest z-index and pointer hidden */
+#hint {
+  position: absolute;
+  pointer-events: none;
+  z-index: 2000; /* above popup */
+}
+
+/* optionally make the glow more visible */
+.interactable.glow {
+  filter: drop-shadow(0 6px 10px rgba(170,108,130,0.25));
+  transform: translateY(-3px);
+}
+
+#messageBox {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: #fff0f8;
+  color: #9c3d73;
+  padding: 12px 20px;
+  border-radius: 12px;
+  border: 2px dashed #f3b4d5;
+  font-family: 'Indie Flower', cursive;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  z-index: 999;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+#messageBox.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+
+
+.project-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 90vw;
+  max-width: 900px;
+  max-height: 600px;
+  transform: translate(-50%, -50%);
+  background: #eef0ff;
+  border: 4px solid #9a9dd8;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(150, 183, 255, 0.5);
+  z-index: 99999;
+  overflow-y: auto;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.close-btn {
+  margin-top: 20px;
+  padding: 10px 14px;
+  background: #fff;
+  border: 3px solid #6e6cb6;
+  border-radius: 8px;
+  color: #4b5a91;
+  font-family: "Press Start 2P", monospace;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translate(-50%, -48%); }
+  to { opacity: 1; transform: translate(-50%, -50%); }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; transform: translate(-50%, -50%); }
+  to   { opacity: 0; transform: translate(-50%, -48%); }
+}
+
+/* Closing state class */
+.project-popup.closing {
+  animation: fadeOut 0.25s ease-out forwards;
+}
+
+.fragment-card {
+  display: flex;
+  align-items: center;
+  background: #f8dff0; /* soft pastel pink */
+  border: 3px solid #e0b6d6; /* same border tone as your project cards */
+  padding: 10px 12px;
+  border-radius: 12px;
+  margin: 15px 0;
+  gap: 10px;
+  width: 92%;
+  box-shadow: 0px 0px 4px rgba(210, 160, 200, 0.25);
+}
+
+.fragment-thumb {
+  width: 60px;
+  height: 60px;
+  image-rendering: pixelated;
+  border: 2px solid #e7c8da;
+  background: #fff;
+  border-radius: 6px;
+}
+
+.fragment-info h3 {
+  margin: 0;
+  font-size: 14px; /* smaller, same scale as your titles */
+  color: #5e3460;
+}
+
+.fragment-info p {
+  margin: 2px 0 0;
+  font-size: 10px;
+  color: #6c4a6f;
+}
+
+.fragment-btn {
+  margin-left: auto;
+  padding: 6px 10px;
+  background: #f7c7db; /* pastel button tone matching the UI */
+  border: 2px solid #d6a7c7;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 10px;
+  color: #5e3460;
+  font-weight: bold;
+  transition: 0.15s;
+}
+
+.fragment-btn:hover {
+  background: #f0b5cf;
+}
+
+
+.small-popup {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-20px);
+  background: #fff3ff;
+  border: 2px solid #e0b3ff;
+  padding: 8px 16px;
+  border-radius: 8px;
+  opacity: 0;
+  transition: 0.3s ease;
+  font-weight: bold;
+  z-index: 999999;
+}
+
+.small-popup.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+
+/* Base sewing popup */
+.sewing-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 240, 250, 0.4);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.hidden { display: none; }
+
+/* Inner box like fabric */
+.sewing-inner {
+  width: 420px;
+  background: #fff7fa;
+  border: 4px dashed #d28eb8;  /* sewing stitch */
+  padding: 25px;
+  border-radius: 20px;
+  position: relative;
+  box-shadow: 0 0 12px rgba(255,160,200,0.4);
+}
+
+/* Cute title */
+.sew-title {
+  text-align: center;
+  color: #c3609c;
+  font-size: 20px;
+  margin-bottom: 20px;
+  text-shadow: 0px 0px 5px white;
+}
+
+/* Sewing cards */
+.sew-card {
+  display: flex;
+  gap: 12px;
+  background: #ffe9f3;
+  border: 3px solid #d7a3c8;
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 18px;
+  position: relative;
+}
+
+/* fake stitch holes */
+.sew-card::before {
+  content: "";
+  position: absolute;
+  top: -7px;
+  left: 15px;
+  width: 12px;
+  height: 12px;
+  background: #ffbfdc;
+  border-radius: 50%;
+  border: 2px solid #d28eb8;
+}
+
+.sew-thumb {
+  width: 75px;
+  height: 75px;
+  border-radius: 8px;
+  border: 2px solid #d9add0;
+  image-rendering: pixelated;
+}
+
+.sew-info h2 {
+  margin: 0;
+  color: #b45890;
+  font-size: 14px;
+}
+
+.sew-info p {
+  font-size: 10px;
+  color: #67445d;
+  margin-top: 4px;
+}
+
+/* sewing button */
+.sew-btn {
+  margin-top: 8px;
+  padding: 6px 10px;
+  background: #fff;
+  border: 3px solid #c87fb2;
+  border-radius: 8px;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.sew-btn:hover {
+  background: #ffe4f1;
+}
+
+/* Close */
+.sew-close {
+  display: block;
+  margin: 15px auto 0;
+  padding: 8px 14px;
+  font-size: 12px;
+  background: #fff;
+  border: 3px solid #bc6ea3;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.sew-close:hover {
+  background: #ffe1f0;
+}
+
+/* Decorative thread line */
+.sew-thread {
+  position: absolute;
+  width: 80%;
+  height: 2px;
+  background: repeating-linear-gradient(
+    to right,
+    #d28eb8 0 6px,
+    transparent 6px 12px
+  );
+  bottom: -15px;
+  left: 10%;
+  opacity: 0.7;
+}
+
+/* Decorative buttons */
+.sew-button {
+  width: 28px;
+  height: 28px;
+  background: #fcd2e7;
+  border: 3px solid #c67ba8;
+  border-radius: 50%;
+  position: absolute;
+}
+
+/* Pop-out animation for the inner box */
+@keyframes popIn {
+  0% {
+    transform: scale(0.5) rotate(-10deg);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.1) rotate(5deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes popOut {
+  0% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.5) rotate(10deg);
+    opacity: 0;
+  }
+}
+
+/* Apply animations via classes */
+.pop-in {
+  animation: popIn 0.35s ease forwards;
+}
+
+.pop-out {
+  animation: popOut 0.35s ease forwards;
+}
+
+
+/* BACKDROP */
+.project-popup-sew {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  overflow: hidden; 
+  flex-direction: column;
+  padding: 30px;
+}
+
+.project-popup-sew.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* --- SEWING KIT BOX --- */
+#project-content-sew {
+  width: 95%;
+  height: 70vh;                /* fixed vertical size so panels fit nicely */
+  max-width: 1200px;          /* allow wider on big screens */
+  background: #fceef4;        /* soft fabric pink */
+  border: 5px dashed #c493ba; /* stitched border */
+  box-shadow: 0 0 20px rgba(255, 180, 220, 0.4);
+  border-radius: 18px;
+  padding: 18px;
+  box-sizing: border-box;
+
+  display: flex;              /* arrange child panels in a row */
+  gap: 18px;                  /* space between panels */
+  align-items: stretch;
+
+  overflow-x: auto;           /* horizontal scroll */
+  overflow-y: hidden;         /* prevent vertical scroll */
+  scroll-behavior: smooth;    /* smooth scroll when programmatic */
+  -webkit-overflow-scrolling: touch;
+
+  transform: translateY(40px) scale(0.95);
+  opacity: 0;
+  transition: all 0.35s ease;
+}
+
+.project-popup-sew.show #project-content-sew {
+  transform: translateY(0px) scale(1);
+  opacity: 1;
+}
+
+/* --- BUTTON: SEWING BUTTON STYLE --- */
+.close-btn-sew {
+  margin-top: 14px;
+  width: 70px;            /* slightly larger for text */
+  height: 70px;
+
+  background: #ffe0f3;
+  border: 4px solid #c47fae;
+  border-radius: 50%;
+  font-size: 9px;
+
+  cursor: pointer;
+  font-family: 'Press Start 2P';
+
+  display: flex;          /* center text */
+  justify-content: center;
+  align-items: center;
+  text-align: center;     /* ensures text wraps nicely */
+
+  margin-left: auto;
+  margin-right: auto;
+
+  box-shadow:
+    inset 0 0 0 3px #ffedf8,
+    0px 3px 0px #c7a1bd;
+}
+
+.close-btn-sew:hover {
+  transform: scale(1.1);
+}
+
+/* --- "THREAD" top title ribbon --- */
+.proj-title {
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 25px;
+  color: #b45ea0;
+
+  padding: 12px;
+  background: #f8ddea;
+  border: 4px dashed #c090b2;      
+  border-radius: 10px;
+  display: inline-block;
+  width: 100%;
+}
+
+/* each panel (project / patch) */
+.proj-panel {
+  flex: 0 0 720px;           
+  height: 100%;
+  background: #ffffff;       
+  border-radius: 12px;
+  border: 4px dotted #c79ab8;
+  padding: 18px;
+  box-sizing: border-box;
+  overflow-y: auto; 
+  overflow-x: hidden;  
+  box-shadow: 0 2px 0 rgba(200,150,180,0.25);
+}
+
+/* make images fit inside panel */
+.proj-panel .proj-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  border: 3px solid #d8a8c9;
+  margin-top: 10px;
+  padding: 6px;
+  background: #fff;
+}
+
+/* panel title etc */
+.proj-panel { font-size: 18px; margin-bottom: 12px; text-align:center; color:#9b5b89; }
+.proj-panel .proj-section { margin-bottom: 14px; }
+
+/* optional: small left/right nav chevrons */
+.project-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.9);
+  border: 2px solid #e1b6d6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 6000;
+  user-select: none;
+}
+.project-nav.left { left: 18px; }
+.project-nav.right { right: 18px; }
+
+/* responsive: smaller panel width on narrow screens */
+@media (max-width: 900px) {
+  #project-content-sew { height: 75vh; }
+  .proj-panel { flex-basis: calc(100% - 36px); } /* single panel full width */
+}
+
+/* --- FABRIC PATCH SECTIONS --- */
+.proj-section {
+  background: #fdeaf3;
+  border: 4px dotted #c79ab8;      /* dotted stitching */
+  padding: 18px;
+  border-radius: 12px;
+  margin-bottom: 22px;
+  box-shadow: 0 2px 0 rgba(200,150,180,0.3); /* patch lifted look */
+}
+
+.proj-section h2 {
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #9b5b89;
+}
+
+.proj-section p,
+.proj-section li {
+  font-size: 10px;
+  line-height: 1.7;
+  color: #5c4e6a;
+}
+
+/* IMAGES: Polaroid Patch Style */
+.proj-img {
+  width: 100%;
+  border-radius: 10px;
+  border: 4px solid #d8a8c9;
+  margin-top: 10px;
+  background: #fff;
+  padding: 6px; /* white polaroid frame */
+}
+
+/* TAGS: Threaded Labels */
+.proj-tags span {
+  display: inline-block;
+  background: #fff2fa;
+  border: 3px dashed #c897b8;
+  padding: 6px 10px;
+  border-radius: 8px;
+  margin: 4px;
+  font-size: 10px;
+  color: #8b4e78;
+  box-shadow: 0 2px 0 rgba(200,150,180,0.3);
+}
+
+/* fade-out animation for sewing popup */
+@keyframes sewClose {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to   { opacity: 0; transform: translateY(40px) scale(0.9); }
+}
+
+.project-popup-sew.closing #project-content-sew {
+  animation: sewClose 0.35s ease forwards !important;
+   transition: none;
+}
+
+/* Center title inside panel */
+.panel-title-center {
+  text-align: center;
+  margin-bottom: 14px;
+  font-size: 16px;
+  color: #9b5b89;
+}
+
+/* Center tags under Tools Used */
+.tags-centered {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+/* Cleaner tutorial box spacing */
+.tutorial-box {
+  padding: 20px;
+  text-align: center;
+}
+
+/* Reduce line width so it doesn’t look cramped */
+.tutorial-text {
+  max-width: 420px;
+  margin: 0 auto 10px auto;
+  font-size: 11px;
+}
+
+/* The link becomes neatly centered */
+.tutorial-link a {
+  color: #8b4e78;
+  text-decoration: underline;
+  word-break: break-all;
+  font-size: 10px;
+}
+
+/* Centered title */
+.panel-title-center {
+  text-align: center;
+  font-size: 16px;
+  margin-bottom: 14px;
+  color: #9b5b89;
+}
+
+/* Tag alignment */
+.tags-centered {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+/* Tutorial/Download box */
+.tutorial-box {
+  padding: 20px;
+  text-align: center;
+}
+
+/* Text max-width */
+.tutorial-text {
+  max-width: 420px;
+  margin: 0 auto 14px auto;
+  font-size: 11px;
+}
+
+/* Cute PDF download button */
+.download-btn {
+  display: inline-block;
+  padding: 10px 16px;
+  background: #ffffff;
+  border: 3px dashed #c897b8;
+  border-radius: 10px;
+  font-size: 11px;
+  color: #8b4e78;
+  text-decoration: none;
+  box-shadow: 0 3px 0 rgba(200,150,180,0.3);
+  transition: transform 0.15s ease;
+}
+
+.download-btn:hover {
+  transform: scale(1.05);
+}
+
+/* LEFT SLIDE POPUP — Shelf Style */
+.personal-popup {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(-100%, -50%);
+  width: 400px;
+  height: 620px;
+
+  background: #e7d5cd; /* soft pastel */
+  border: 4px solid #66513c; 
+  border-radius: 12px;
+
+  padding: 20px;
+  z-index: 999;
+  transition: transform 0.45s ease-in-out;
+
+  /* Shelf-like shadow */
+  box-shadow:
+    6px 6px 0 #463725,        /* pixel drop shadow */
+    inset 0 0 8px #f7d9eb;   /* soft inner glow like a shelf depth */
+}
+
+.personal-popup.show {
+  transform: translate(0, -50%);
+}
+
+.personal-inner {
+  overflow-y: auto;
+  height: 100%;
+  padding-right: 10px;
+}
+
+/* Title — cleaner shelf header */
+.personal-title {
+  text-align: center;
+  font-family: "Press Start 2P";
+  color: #8b4d7c;
+  font-size: 20px;
+
+  background: #f8dbea;
+  border: 4px solid #c28ab4; /* solid now */
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 18px;
+
+  box-shadow: 3px 3px 0 #bf90b1;
+}
+
+/* Cards */
+.personal-card {
+  display: flex;
+  gap: 10px;
+  background: #fff7fb;
+  border: 3px solid #cfa2c0; /* smoother, no dash */
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 14px;
+
+  box-shadow: 3px 3px 0 #d2a6c5; /* light pixel-shadow */
+}
+
+.personal-thumb {
+  width: 85px;
+  height: auto;
+  image-rendering: pixelated;
+}
+
+.personal-info h2 {
+  margin: 0;
+  font-size: 14px;
+  color: #7f3e71;
+  font-family: "Press Start 2P";
+}
+
+.personal-info p {
+  font-size: 11px;
+  color: #5c3756;
+  line-height: 1.4;
+  font-family: monospace;
+}
+
+/* Button */
+.personal-btn {
+  background: #ecc6dc;
+  border: 3px solid #b676a4;
+  padding: 6px 12px;
+  margin-top: 8px;
+  font-family: "Press Start 2P";
+  cursor: pointer;
+  box-shadow: 3px 3px 0 #c38db2;
+}
+
+/* Close Button */
+.personal-close {
+  margin-top: 10px;
+  width: 100%;
+  padding: 10px;
+  font-family: "Press Start 2P";
+
+  background: #f6e1eb;
+  border: 4px solid #a96a96;
+
+  cursor: pointer;
+  box-shadow: 4px 4px 0 #c797b5;
+}
+
+/* Wooden top bar */
+.shelf-topbar {
+  position: absolute;
+  top: -18px;
+  left: 0;
+  width: 100%;
+  height: 18px;
+
+  background: #d7b89d; /* wooden pastel brown */
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+
+  box-shadow: 
+    inset 0 -4px 0 #b19078,
+    0 4px 0 #b19078;
+}
+
+/* Side brackets */
+.shelf-bracket {
+  position: absolute;
+  width: 14px;
+  height: 60px;
+
+  background: #c8a89a;
+  border: 3px solid #a38475;
+  image-rendering: pixelated;
+
+  top: 40px;
+}
+
+.shelf-bracket.left {
+  left: -20px;
+}
+
+.shelf-bracket.right {
+  right: -20px;
+}
+
+/* Pixel screws / nails */
+.shelf-screw {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #7b5e66;
+  border: 2px solid #4b3a3f;
+  border-radius: 50%;
+  box-shadow: 2px 2px 0 #d8bdc6;
+}
+
+.shelf-screw.tl { top: 8px; left: 8px; }
+.shelf-screw.tr { top: 8px; right: 8px; }
+.shelf-screw.bl { bottom: 8px; left: 8px; }
+.shelf-screw.br { bottom: 8px; right: 8px; }
+
+
+/* === SHELF POPUP (New Style) === */
+
+/* ============================================================
+   POPUP BACKDROP
+============================================================ */
+.shelf-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(3px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999999;
+}
+
+.shelf-popup.hidden {
+  display: none;
+}
+
+
+/* ============================================================
+   🪵 OUTER FRAME — "Shelf Column"
+   Tall, vertical, wooden structure
+============================================================ */
+.shelf-popup-inner {
+  position: relative;
+  width: 720px;
+  max-height: 90vh;
+  padding: 26px;
+
+  /* Wood texture */
+  background: #e7d5cd url('assets/ui/woodgrain.png');
+  background-size: cover;
+
+  border: 10px solid #8c6847;
+  border-radius: 18px;
+
+  box-shadow:
+    inset 0 0 40px rgba(0,0,0,0.35),  /* hollow shelf depth */
+    8px 8px 0 #b58e63;                /* pixel offset */
+
+  overflow-y: auto;
+  overflow-x: hidden;
+  image-rendering: pixelated;
+
+  transform: scale(0.85);
+  opacity: 0;
+  transition: 0.35s ease;
+}
+
+.shelf-popup.show .shelf-popup-inner {
+  transform: scale(1);
+  opacity: 1;
+}
+
+
+/* ============================================================
+   SHELF TOP CAP
+============================================================ */
+.shelf-topbar {
+  position: absolute;
+  top: -24px;
+  left: 0;
+  width: 100%;
+  height: 22px;
+  background: #c59a6a;
+  border-radius: 12px 12px 0 0;
+  box-shadow: inset 0 -6px 0 #926d4d;
+}
+
+
+/* ============================================================
+   CLOSE BUTTON
+============================================================ */
+.shelf-popup-close {
+  margin: 18px auto 10px;
+  width: 100%;
+  padding: 12px;
+  cursor: pointer;
+  text-align: center;
+
+  background: #ffffff;
+  border: 4px solid #d5d18f;
+  border-radius: 12px;
+  font-family: "Press Start 2P";
+}
+
+
+/* ============================================================
+   🌼 INNER PANEL STYLE (White + Pastel Yellow)
+============================================================ */
+
+.proj-panel.verdict-panel {
+  background: linear-gradient(180deg, #ffffff 0%, #fff9e8 70%, #fff4d2 100%);
+  border: 4px solid #e8dbb3;
+  border-radius: 16px;
+  padding: 26px 28px;
+  margin-bottom: 32px;
+
+  /* Softer, more realistic depth */
+  box-shadow:
+    inset 0 4px 10px rgba(255,255,255, 0.9),
+    inset 0 -4px 12px rgba(0,0,0,0.05),
+    0 4px 12px rgba(0,0,0,0.18),
+    0 0 8px rgba(255,240,180,0.5);
+
+  image-rendering: pixelated;
+  position: relative;
+  text-align: center;
+}
+
+
+/* ✨ Decorative top ribbon */
+.proj-panel.verdict-panel::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 14px;
+  background: linear-gradient(90deg, #fff7d6, #fff0c2, #fff7d6);
+  border: 2px solid #e4d29e;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.12);
+}
+
+
+/* ✨ Soft inner borders for layered depth */
+.proj-panel.verdict-panel::after {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border-radius: 12px;
+  border: 2px solid rgba(230,210,160,0.4);
+  pointer-events: none;
+}
+
+
+/* ============================================================
+   Headings
+============================================================ */
+.proj-panel.verdict-panel h2,
+.panel-title-center-ver {
+  display:  inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 40px; /* 🔒 hard lock */
+  margin-bottom: 16px;
+
+  font-size: 18px;
+  color: #7a5a23;
+  font-family: "Press Start 2P";
+  letter-spacing: 1.2px;
+  width: 450px;
+
+  background: linear-gradient(180deg, #fff8e5 0%, #f6e5c0 100%);
+  border: 2px solid #e6d1a0;
+  border-radius: 12px;
+
+  text-shadow:
+    1px 1px #fff8e5,
+    2px 2px rgba(0,0,0,0.1);
+
+  box-shadow:
+    0 4px 6px rgba(0,0,0,0.08),
+    inset 0 2px 4px rgba(255,255,255,0.6);
+
+  clip-path: polygon(5% 0%, 95% 0%, 100% 50%, 95% 100%, 5% 100%, 0% 50%);
+
+  position: relative;
+  image-rendering: pixelated;
+  
+}
+
+/* Optional: small highlight line at top for engraved effect */
+.proj-panel.verdict-panel h2::before,
+.panel-title-center-ver::before {
+content: "";
+  position: absolute;
+  top: 4px;
+  left: 10%;
+  width: 80%;
+  height: 2px;
+
+  background: rgba(255,255,255,0.6);
+  pointer-events: none;
+}
+
+/* ============================================================
+   SECTION BOXES
+============================================================ */
+
+.proj-section-ver {
+  background: linear-gradient(180deg, #ffffff 0%, #fffdf4 40%, #fff7dd 100%);
+  border: 3px solid #e8dfb6;
+  border-radius: 14px;
+  padding: 20px 22px;
+  margin-bottom: 24px;
+
+  /* Softer but deeper pastel glow */
+  box-shadow:
+    inset 0 3px 10px rgba(255,255,255,0.9),
+    inset 0 -3px 8px rgba(0,0,0,0.05),
+    0 2px 6px rgba(0,0,0,0.12),
+    0 0 6px rgba(255,235,190,0.45);
+
+  position: relative;
+  image-rendering: pixelated;
+}
+
+
+/* ✨ Inner border frame */
+.proj-section-ver::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border-radius: 10px;
+  border: 2px solid rgba(230,215,160,0.35);
+  pointer-events: none;
+}
+
+
+/* ============================================================
+   Header
+============================================================ */
+.proj-section-ver h2 {
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: #927334;
+  text-shadow: 1px 1px #fff5cb;
+  font-family: "Press Start 2P";
+  letter-spacing: 0.5px;
+}
+
+.proj-section-ver h3 {
+  position: relative;
+  font-size: 20px;
+  margin-bottom: 18px;
+  color: #927334;
+  text-shadow: 1px 1px #fff5cb;
+  font-family: "Press Start 2P";
+  letter-spacing: 0.5px;
+}
+
+/* Decorative strip */
+.proj-section-ver h3::after {
+  content: "";
+  display: block;
+  margin-top: 8px;
+  height: 6px;
+  width: 100%;
+
+  background: linear-gradient(
+    to right,
+    #e8d6a8,
+    #f7ecc9,
+    #e8d6a8
+  );
+
+  border: 2px solid #b89652;
+  border-radius: 6px;
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,0.6),
+    0 2px rgba(120,90,30,0.25);
+}
+
+
+
+/* ============================================================
+   Text
+============================================================ */
+.proj-section-ver p,
+.proj-section-ver li {
+  font-size: 12px;
+  line-height: 1.65;
+  color: #7d6a3c;
+}
+
+/* ============================================================
+   TITLE BAR — Soft Pastel Plate
+============================================================ */
+
+.proj-title-ver {
+  text-align: center;
+  font-size: 24px;
+  padding: 22px 16px;
+  margin: 36px 0;
+
+  color: #6f4a1e;
+  font-family: "Press Start 2P";
+
+  background: linear-gradient(180deg, #fffefb, #fff1c3);
+  border: 5px solid #e3d1a2;
+  border-radius: 18px;
+
+  image-rendering: pixelated;
+
+  box-shadow:
+    inset 0 4px 10px rgba(255,255,255,0.95),
+    inset 0 -4px 10px rgba(0,0,0,0.05),
+    0 6px 12px rgba(0,0,0,0.18),
+    0 0 10px rgba(255,230,150,0.6);
+
+  position: relative;
+}
+
+/* ✨ Light beam bar under the title */
+.proj-title-ver::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 160px;
+  height: 10px;
+
+  background: linear-gradient(90deg, #eadfb3, #fff7d6, #eadfb3);
+  border-radius: 6px;
+  opacity: 0.9;
+}
+
+/* ============================================================
+   IMAGE GRID
+============================================================ */
+.verdict-screens {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.verdict-screens img {
+  width: 100%;
+  border: 3px solid #dac69a;
+  background: #fffdf4;
+  padding: 4px;
+  border-radius: 6px;
+ image-rendering: auto;
+  box-shadow: 0 0 6px rgba(0,0,0,0.15);
+}
+
+
+/* ============================================================
+   TAGS + DIVIDER
+============================================================ */
+.verdict-subtitle {
+  color: #a8893a;
+  font-family: "Press Start 2P";
+}
+
+.verdict-divider {
+  width: 100%;
+  image-rendering: auto;
+  height: 10px;
+  margin: 16px 0;
+  background: repeating-linear-gradient(
+    90deg,
+    #eadfb3 0px,
+    #eadfb3 6px,
+    #fff7d6 6px,
+    #fff7d6 12px
+  );
+  border-radius: 6px;
+}
+
+.proj-tags-ver span {
+  display: inline-block;
+  background: linear-gradient(180deg, #fffdf4 0%, #fff6d7 100%);
+  border: 2px solid #e8d9a5; /* lighter border to differentiate */
+  border-radius: 12px;
+  
+  padding: 6px 12px;
+  margin: 4px;
+  font-size: 11px;
+  font-family: "Press Start 2P";
+  color: #a8873a; 
+  box-shadow:
+    inset 0 2px 3px rgba(255,255,255,0.6), 
+    0 2px 2px rgba(0,0,0,0.08);          
+
+  image-rendering: pixelated;
+  transition: transform 0.15s ease;
+}
+
+.proj-tags-ver span:hover {
+  transform: translateY(-2px);
+}
+
+
+.verdict-design-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.design-card {
+  background: linear-gradient(180deg, #fffdf5, #fff3ce);
+  border: 3px solid #e6d8a8;
+  border-radius: 14px;
+  padding: 16px 18px;
+
+  box-shadow:
+    inset 0 2px 6px rgba(255,255,255,0.9),
+    0 3px 8px rgba(0,0,0,0.12),
+    0 0 6px rgba(255,230,150,0.4);
+
+  image-rendering: pixelated;
+}
+
+.design-card h3 {
+  font-family: "Press Start 2P";
+  font-size: 12px;
+  color: #82642d;
+  margin-bottom: 18px;
+  text-shadow: 1px 1px #fff7d4;
+  position: relative;
+}
+
+/* gothic strip */
+.design-card h3::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 6px;
+
+  background: linear-gradient(90deg, #d8c79b, #d8c79b, #d8c79b);
+  border-radius: 4px;
+
+  box-shadow:
+    0 2px 4px rgba(0,0,0,0.12),
+    inset 0 1px 2px rgba(255,255,255,0.9);
+}
+
+
+.design-card p {
+  font-size: 11px;
+  color: #6e5c32;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.design-card img {
+  width: 140px;
+  height: auto;
+  margin: 0 auto 10px;
+  display: block;
+
+  border: 3px solid #d6c293;
+  border-radius: 8px;
+  background: #fffef8;
+  padding: 4px;
+
+  image-rendering: pixelated;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+
+/* Horizontal scroll container */
+.mask-scroll {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  margin-top: 12px;
+
+  scroll-snap-type: x mandatory;
+
+  /* Soft scrollbar removal but still scrollable */
+  scrollbar-width: none;
+}
+.mask-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Items */
+.mask-item {
+  flex: 0 0 auto;
+  width: 130px;
+  text-align: center;
+  scroll-snap-align: start;
+  background: linear-gradient(#f9f6ef, #e8dfc7);
+  border: 2px solid #cfb992;
+  border-radius: 6px;
+  padding: 14px 10px;
+  box-shadow:
+    0 3px 0 #c3b48d,
+    0 4px 6px rgba(0,0,0,0.25);
+
+  image-rendering: pixelated;
+}
+
+
+/* Mask image */
+.mask-item img {
+  width: 90px;
+  border: 2px solid #a48c5e;
+  border-radius: 4px;
+  padding: 3px;
+  background: #fffdf7;
+
+  box-shadow:
+    inset 0 1px 2px rgba(0,0,0,0.1),
+    0 1px 3px rgba(0,0,0,0.15);
+}
+
+
+/* Text */
+.mask-item span {
+  display: block;
+  font-size: 11px;
+  font-family: "Press Start 2P";
+  color: #7a5c29;
+  text-shadow: 1px 1px #fff5cd;
+}
+
+.mask-scroll {
+  position: relative;
+  padding-bottom: 24px;
+}
+
+.mask-scroll::after {
+  content: "← Swipe →";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  font-family: "Press Start 2P";
+  color: #b48a4b;
+  opacity: 0.7;
+  animation: fadeMove 1.8s infinite;
+}
+
+@keyframes fadeMove {
+  0% { opacity: 0.4; transform: translateX(-50%) translateY(0); }
+  50% { opacity: 1; transform: translateX(-50%) translateY(3px); }
+  100% { opacity: 0.4; transform: translateX(-50%) translateY(0); }
+}
+
+
+.verdict-cobweb-img {
+  position: absolute;
+  left: 10%;
+  top: -50px;
+  transform: translateX(-50%);
+  width: 250px;
+  opacity: 0.7;
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+
+.verdict-gold-img {
+  position: absolute;
+  right: -15%;
+  top: -40px;
+  transform: translateX(-50%);
+  width: 200px;
+  opacity: 0.7;
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+
+.verdict-Carrot-img {
+  position: absolute;
+  right: -15%;
+  top: -40px;
+  transform: translateX(-50%);
+  width: 180px;
+  opacity: 0.7;
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+

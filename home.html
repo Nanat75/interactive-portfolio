@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Nathasya's Pixel House</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/css/home.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+   
+
+</head>
+<body>
+
+  <div id="scene">
+  <div id="game-container">
+    
+    <!-- Background -->
+    <img id="room-bg" src="assets/css/img/livingroom.webp" alt="Living Room Background">
+
+ <div id="wall-text">
+  <h1><span class="normal-text">Welcome to my</span> <span class="highlight">Portfolio!</span></h1>
+</div>
+
+  <!-- Dialogue Box -->
+  <div id="dialogue-box" class="hidden">
+  <p id="dialogue-text"></p>
+  <div class="dialogue-buttons">
+    <button onclick="closeDialogue()">Close</button>
+    <button onclick="goToAbout()">Next</button>
+  </div>
+</div>
+
+    <!-- Player Sprite -->
+    <img id="player" src="assets/css/img/your-sprite.webp" alt="Player Character">
+
+    <!-- Interactable Diary -->
+    <img id="paper" src="assets/css/img/paper.webp" alt="Paper" class="interactable" style="top: 400px; left: 180px; position: absolute;">
+
+    <!-- Photo Frame object in the room -->
+<img src="assets/css/img/sparkle.webp" id="photo-frame" class="object" />
+
+<!-- Hero Info Pop-up (Styled as TV-pixel ID Card) -->
+<div id="hero-popup" class="hidden">
+  <div class="hero-wrapper">
+    <div class="hero-toolbar">
+      <span class="toolbar-title"> ♡ Home Section ♡ </span>
+    </div>
+
+
+    <button onclick="closeHero()" class="hero-close-btn">X</button>
+
+    <div class="hero-body">
+      <img src="assets/css/img/portrait.webp" alt="Nathasya" class="hero-portrait">
+
+      <div class="hero-content">
+        <div class="hero-name">" Nathasya Aulia Putri ☆"</div>
+        <div class="hero-desc">Frontend Explorer | Aspiring Web Developer | Student ✦</div>
+
+        <div class="quote">
+          <i>"Designing with purpose. Developing with passion."</i><br>
+          <i>"Showcasing creativity, code, and everything in between" - Nathasya</i>
+        </div>
+
+        <div class="social-icons">
+  <a href="https://github.com/yourusername" target="_blank" aria-label="GitHub">
+    <i class="fab fa-github"></i>
+  </a>
+  <a href="https://instagram.com/yourusername" target="_blank" aria-label="Instagram">
+    <i class="fab fa-instagram"></i>
+  </a>
+  <a href="mailto:youremail@example.com" aria-label="Email">
+    <i class="fas fa-envelope"></i>
+  </a>
+</div>
+      <div class="fact-wrapper">
+  <strong>Fact:</strong> <span class="short-fact">“Loading...”</span>
+</div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Diary Prompt -->
+<div id="diary-dialogue" class="hidden">
+  <p id="diary-dialogue-text"></p>
+  <button id="open-diary-yes">Yes</button>
+  <button id="open-diary-no">No</button>
+</div>
+
+<div id="messageBox" style="display:none; position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#fff0f8; color:#9c3d73; padding:12px 20px; border-radius:12px; border:2px dashed #f3b4d5; font-family:'Indie Flower', cursive; font-size:1.1rem; box-shadow:0 4px 12px rgba(0,0,0,0.2); z-index:999;">Message</div>
+
+
+<!-- New Falling Diary -->
+<img id="diary" src="assets/css/img/diary.webp" alt="Diary">
+
+<!-- Diary Pop-Up -->
+<div id="diary-popup" class="hidden">
+  <button id="close-diary">&times;</button>
+
+  <div class="page left-page">
+    <div class="page-content">
+      <h2>About Me</h2>
+      <p>Hi! I’m someone who finds beauty in quiet moments and simple things. I love pixel art, story-driven games, and cozy atmospheres where imagination can bloom freely.</p>
+      <p>I’ve always been drawn to creating — whether that’s through coding little worlds, sketching dreamy scenes, or writing things that blend soft and eerie tones.</p>
+    </div>
+  </div>
+
+<div class="page right-page">
+  <div class="page-content">
+    <h2>You Found a Key!</h2>
+    <p><em>Click it to pick it up.</em></p>
+  </div>
+
+  <div id="key" class="key"></div>
+  </div>
+</div>
+
+   <!-- Interaction Hint -->
+    <div id="interaction-hint" style="position: absolute; display: none;">Press Z to read the diary</div>
+
+
+<!-- Welcome Note Paper (About Us) -->
+<div id="about-us" class="hidden">
+  <div class="book-page">
+    <h2>To the Curious Visitor,</h2>
+    <p>
+      If you're reading this...<br>
+      Welcome to my little pixel sanctuary! <br><br>
+
+      This place is more than just a room. it's a reflection of my world, my stories, and everything I love creating. From pixel art to web designing, every corner holds a piece of me.<br><br>
+
+      Take your time exploring. Interact with what catches your eye, you never know what you might learn about me 👀.<br><br>
+
+      And one last thing... they say there's a key hidden somewhere. You might need it to unlock what's next~
+    </p>
+    <button id="close-about">Close</button>
+  </div>
+</div>
+  </div>
+
+    <div class="back-home-wrapper">
+    <a href="index.html" class="back-home-btn">← Back to Intro</a>
+  </div>
+
+  </div>
+  <audio id="bg-music" src="assets/05. By Your Side.mp3" loop autoplay></audio>
+<audio id="button-sound" src="assets/unlock.mp3"></audio>
+<audio id="key-sound" src="assets/pickup-key.mp3"></audio>
+<audio id="locked-sound" src="assets/locked.mp3" preload="auto"></audio>
+<audio id="transition-sound" src="assets/transition.mp3" preload="auto"></audio>
+<audio id="spawn-sound" src="assets/spawn-in.mp3"></audio>
+
+  <script src="assets/js/script1.js"></script>
+</body>
+</html>

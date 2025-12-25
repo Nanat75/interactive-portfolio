@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nathasya Aulia Putri | Portfolio</title>
+
+  <!-- Pixel font & CSS -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+  <!-- Game-style start screen -->
+  <div class="door-frame">
+    <!-- Left door with window and flower -->
+    <div class="door left-door">
+      <div class="window"></div>
+      <div class="branch branch-left"></div>
+    </div>
+
+    <!-- Lock button styled like START button -->
+    <div class="center-lock">
+      <button class="lock-btn" onclick="unlockDoor()">
+        <span>START</span>
+      </button>
+    </div>
+
+    <!-- Right door -->
+    <div class="door right-door">
+      <div class="window"></div>
+      <div class="branch branch-right"></div>
+    </div>
+
+<!-- Character Sprite -->
+<div class="character-girl hidden"></div>
+
+<!-- Dialogue Box with Buttons -->
+<div class="dialogue-box hidden">
+  <p>“Oh, hello user! Do you want to proceed to my homepage?”</p>
+  <div class="dialogue-buttons">
+    <button onclick="goToHome()">YES</button>
+    <button onclick="closeDoor()">NO</button>
+  </div>
+</div>
+
+    <!-- Loading screen -->
+    <div class="loading-screen active" id="loadingScreen">
+      <div class="loading-text">Loading Portfolio</div>
+    </div>
+ </div>
+
+ <!-- New loading screen for YES -->
+<div class="yes-loading-screen hidden" id="yesLoadingScreen">
+  <div class="yes-loading-text">Preparing your homepage</div>
+</div>
+
+
+ <div class="bottom-railing">
+  <img src="assets/css/img/railing.webp" alt="Pixel Railing" />
+</div>
+
+<div class="container">
+  <!-- your door, start button, cat, etc -->
+
+  <!-- Bushes -->
+  <img src="assets/css/img/bush.webp" alt="left bush" class="bush left">
+  <img src="assets/css/img/bush.webp" alt="right bush" class="bush right">
+</div>
+
+<div class="flower-vine left-vine">
+  <img src="assets/css/img/vines.webp" alt="Left Flower Vine" />
+</div>
+
+<div class="flower-vine right-vine">
+  <img src="assets/css/img/vines.webp" alt="Right Flower Vine" />
+</div>
+
+
+  <!-- Unlock sound -->
+  <audio id="unlockSound" src="assets/unlock.mp3" preload="auto"></audio>
+  <audio id="closeSound" src="assets/close-door.mp3" preload="auto"></audio>
+  <audio id="bg-music" src="assets/02. WHITE SPACE.mp3" loop preload="auto"></audio>
+  <audio id="buttonSound" src="assets/unlock.mp3" preload="auto"></audio>
+  
+  <!-- Game-style door logic -->
+<script>
+  window.addEventListener('load', () => {
+    // Hide loading screen after delay on initial load
+    setTimeout(() => {
+      document.getElementById('loadingScreen').classList.remove('active');
+    }, 2500);
+  });
+
+function unlockDoor() {
+  const lockBtn = document.querySelector('.lock-btn');
+  const leftDoor = document.querySelector('.left-door');
+  const rightDoor = document.querySelector('.right-door');
+  const doorFrame = document.querySelector('.door-frame');
+  const unlockSound = document.getElementById('unlockSound');
+  const bgMusic = document.getElementById('bg-music');
+  const character = document.querySelector('.character-girl');
+  const dialogue = document.querySelector('.dialogue-box');
+
+  document.querySelector('.center-lock').style.display = 'none';
+
+  unlockSound.play().catch(() => {});
+  
+  // 🎵 START BACKGROUND MUSIC HERE
+  bgMusic.volume = 0.4; // soft & cozy
+  bgMusic.play().catch(() => {
+    console.warn("Autoplay blocked until user interaction");
+  });
+
+  lockBtn.classList.add('unlocked');
+  lockBtn.innerHTML = '<span>✔️</span>';
+
+  leftDoor.classList.add('open-left-door');
+  rightDoor.classList.add('open-right-door');
+
+  setTimeout(() => {
+    doorFrame.classList.add('doors-open');
+  }, 1000);
+
+  setTimeout(() => {
+    character.classList.remove('hidden');
+    character.classList.add('visible');
+    dialogue.classList.remove('hidden');
+    dialogue.classList.add('visible');
+  }, 1800);
+}
+
+  function goToHome() {
+    const buttonSound = document.getElementById('buttonSound');
+    const yesLoading = document.getElementById('yesLoadingScreen');
+
+    buttonSound.play().catch(() => console.warn("Sound play blocked by browser."));
+
+    // Show the new YES loading screen
+    yesLoading.classList.remove('hidden');
+
+    // Add fade-out effect
+  setTimeout(() => {
+    doorFrame.classList.add('fade-out'); // or document.body.classList.add('fade-out');
+  }, 800); // slight delay to let loading screen appear first
+
+  // Delay to simulate loading, then redirect
+  setTimeout(() => {
+    window.location.href = 'home.html';
+  }, 2500);
+}
+
+  function closeDoor() {
+    const leftDoor = document.querySelector('.left-door');
+    const rightDoor = document.querySelector('.right-door');
+    const dialogue = document.querySelector('.dialogue-box');
+    const character = document.querySelector('.character-girl');
+    const buttonSound = document.getElementById('buttonSound');
+    const closeSound = document.getElementById('closeSound');
+
+    // Hide sprite and dialogue
+    dialogue.classList.add('hidden');
+    dialogue.classList.remove('visible');
+    character.classList.remove('visible');
+
+    // Close doors
+    leftDoor.classList.remove('open-left-door');
+    rightDoor.classList.remove('open-right-door');
+
+      // Play door closing sound slightly after animation starts
+  setTimeout(() => {
+    closeSound.play().catch(() => console.warn("Close sound play blocked"));
+  }, 300); 
+
+    // Show lock again after doors close
+    setTimeout(() => {
+      document.querySelector('.center-lock').style.display = 'block';
+    }, 1600);
+  }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Nathasya's Pixel House</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="assets/css/project.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- Message Box -->
+<div id="messageBox">
+  Message
+</div>
+
+<div id="scene">
+  <div id="game-container">
+
+    <img id="room-bg" src="assets/css/img/workshop.webp">
+
+     <div id="wall-text">
+  <h1><span class="normal-text">My Project</span> <span class="highlight">Section</span></h1>
+</div>
+
+    <img id="player" src="assets/css/img/your-sprite.webp">
+
+      <!-- interactable -->
+    <img id="repair-box" class="interactable" src="assets/css/img/transparent.webp" style="top: 280px; left: 130px; width:140px;">
+    <img id="sewing-box" class="interactable" src="assets/css/img/transparent.webp" style="top: 360px; right: 650px; width:140px;">
+    <img id="personal-box" class="interactable" src="assets/css/img/transparent.webp" style="top: 380px; right: 200px; width:140px;">
+
+
+    <img id="note-paper" class="interactable" src="assets/css/img/paper torn.webp" style="bottom: 20px; left: 280px; width: 100px;">
+
+<!-- INTERNSHIP PROJECT -->
+<div id="repair-popup" class="popup hidden">
+  <div class="popup-inner">
+    <h1>Internship Projects</h1>
+
+    <!-- PROJECT 1 -->
+    <div class="project-card">
+      <img src="assets/css/img/mr.pepbot.webp" class="project-thumb">
+      <div class="project-info">
+        <h2>⚙ NotaTrack</h2>
+        <p>Official internship project following company requirements.</p>
+        <button class="project-btn" onclick="openInternProject('notatrack')">View Detail</button>
+      </div>
+    </div>
+
+    <!-- PROJECT 2 -->
+    <div class="project-card">
+      <img src="assets/css/img/mascot.webp" class="project-thumb">
+      <div class="project-info">
+        <h2>⚙ FixQuest</h2>
+        <p>Side/personal project created during internship to fix workflow gaps.</p>
+        <button class="project-btn" onclick="openInternProject('fixquest')">View Detail</button>
+      </div>
+    </div>
+    
+        <!--  CIRCUIT BOARD FRAGMENT DRAWER -->
+    <div id="circuit-fragment" class="fragment-card">
+      <img src="assets/css/img/circuit board.webp" class="fragment-thumb">
+      <div class="fragment-info">
+        <h3>Circuit Board </h3>
+        <p>A broken piece related to your Internship Project category.</p>
+      </div>
+      <button class="fragment-btn" onclick="collectFragment('circuit')">Collect</button>
+    </div>
+
+    <button id="close-popup" class="popup-btn">Close</button>
+  </div>
+</div>
+
+<!-- SCHOOL PROJECT -->
+<div id="sewing-popup" class="sewing-popup hidden">
+  <div class="sewing-inner">
+    
+    <h1 class="sew-title">School Projects</h1>
+    
+      <!-- PROJECT 1 -->
+    <div class="sew-card">
+      <img src="assets/css/img/sweets.webp" class="sew-thumb">
+      <div class="sew-info">
+        <h2>Sweets & Treats</h2>
+        <p>
+          My first school web development project! an e-commerce site for desserts,
+          inspired by a YouTube tutorial. Built with HTML, CSS, and JS.
+        </p>
+        <button class="sew-btn" onclick="openSchoolProject('sweets')">View Detail</button>
+      </div>
+    </div>
+
+    <!-- PROJECT 2 -->
+    <div class="sew-card">
+      <img src="assets/css/img/debian.webp" class="sew-thumb">
+      <div class="sew-info">
+        <h2>Debian Guide</h2>
+        <p>
+          A school project explaining how to use Debian.  
+          Includes a digital guide and the making of a mini book explaining the step by step of the website.
+        </p>
+        <button class="sew-btn" onclick="openSchoolProject('debian')">View Detail</button>
+      </div>
+    </div>
+
+     <!-- PROJECT 3 -->
+    <div class="sew-card">
+      <img src="assets/css/img/SKZ.webp" class="sew-thumb">
+      <div class="sew-info">
+        <h2>StayTuned</h2>
+        <p>
+          First project using framework laravel, learning routes and basic laravel code.  
+          about an article website about stray kids.
+        </p>
+        <button class="sew-btn" onclick="openSchoolProject('skz')">View Detail</button>
+      </div>
+    </div>
+
+       <!-- GEAR FRAGMENT Sewing -->
+    <div id="gear-fragment" class="fragment-card">
+      <img src="assets/css/img/gear piece.webp" class="fragment-thumb">
+      <div class="fragment-info">
+        <h3>Gear Piece</h3>
+        <p>A broken piece related to your school Project category.</p>
+      </div>
+      <button class="fragment-btn" onclick="collectFragment('gear')">Collect</button>
+    </div>
+
+    <button id="close-sewing-popup" class="sew-close">Close</button>
+
+    <!-- extra decoration -->
+    <div class="sew-thread"></div>
+    <div class="sew-button deco1"></div>
+    <div class="sew-button deco2"></div>
+  </div>
+</div>
+
+<!-- PERSONAL PROJECT POPUP (LEFT SIDE) -->
+<div id="personal-popup" class="personal-popup hidden">
+  <div class="personal-inner">
+
+    <h1 class="personal-title">Personal Projects</h1>
+
+    <!-- PROJECT 1 -->
+    <div class="personal-card">
+      <img src="assets/css/img/health.webp" class="personal-thumb">
+      <div class="personal-info">
+        <h2>Healthify</h2>
+        <p>
+          A calorie & meal tracking tool I built because most trackers were too complex.
+          Healthify includes a clean dashboard, weight-change tracker, automatic weekly
+          goal calculation, and visual progress charts.
+        </p>
+        <button class="personal-btn" onclick="openPersonalProject('healthify')">View Detail</button>
+      </div>
+    </div>
+
+    <!-- PROJECT 2 -->
+    <div class="personal-card">
+      <img src="assets/css/img/gold.webp" class="personal-thumb">
+      <div class="personal-info">
+        <h2>Last Verdict (WIP)</h2>
+        <p>
+          A personal indie game made with Phaser.js (frontend) and Laravel (backend).  
+          Developed independently to improve my full-stack and game development skills.
+        </p>
+        <button class="personal-btn" onclick="openPersonalProject('verdict')">View Detail</button>
+      </div>
+    </div>
+
+    <!-- WORKSHOP SCREW FRAGMENT -->
+    <div id="battery-fragment" class="fragment-card">
+      <img src="assets/css/img/battery cell.webp" class="fragment-thumb">
+      <div class="fragment-info">
+        <h3>battery cell</h3>
+        <p>A broken piece related to your Personal Projects category.</p>
+      </div>
+      <button class="fragment-btn" onclick="collectFragment('battery')">Collect</button>
+    </div>
+
+    <button id="close-personal-popup" class="personal-close">Close</button>
+
+    <!-- small workshop decorations -->
+    <div class="workshop-shadow"></div>
+    <div class="workshop-nut deco1"></div>
+    <div class="workshop-nut deco2"></div>
+
+  <div class="shelf-topbar"></div>
+<div class="shelf-bracket left"></div>
+<div class="shelf-bracket right"></div>
+<div class="shelf-screw tl"></div>
+<div class="shelf-screw tr"></div>
+<div class="shelf-screw bl"></div>
+<div class="shelf-screw br"></div>
+
+  </div>
+</div>
+
+
+  <!-- POP OUT  -->
+<div id="project-popup" class="project-popup hidden">
+  <div id="project-content"></div>
+  <button id="close-project-popup" class="close-btn">Close</button>
+</div>
+
+  <div id="project-popup-sew" class="project-popup-sew hidden">
+  <div id="project-content-sew"></div>
+  <button id="close-project-popup-sew" class="close-btn-sew">Close</button>
+</div>
+
+<div id="shelf-popup" class="shelf-popup hidden">
+  <div class="shelf-popup-inner">
+    <div class="shelf-topbar"></div>
+    <div id="shelf-popup-content"></div>
+    <button id="shelf-popup-close" class="shelf-popup-close">Close</button>
+  </div>
+
+</div>
+
+
+   <div class="back-home-wrapper">
+    <a href="Skill.html" class="back-home-btn">← Back to Kitchen</a>
+  </div>
+
+  </div>
+</div>
+
+<div id="hint" style="
+  position:absolute;
+  display:none;
+  z-index:999;
+  pointer-events:none;
+">
+
+<div id="hint-box" style="
+  background:rgba(255,255,255,0.75);
+  color:#5e3460;
+  padding:8px 14px;
+  border:2px solid #e8b7d1;
+  border-radius:6px;
+  font-size:13px;
+  font-family:'Press Start 2P', monospace;
+  box-shadow:0 0 5px rgba(255,195,225,0.6);
+  width:max-content;
+  margin:auto;
+"></div>
+
+  <!-- ▼ pointer -->
+  <div id="hint-arrow" style="
+    text-align:center;
+    font-size:18px;
+    color:#5e3460;;
+    margin-top:2px;
+    font-family:'Press Start 2P', monospace;
+  ">▼</div>
+</div>
+
+<audio id="bg-music" src="assets/05. By Your Side.mp3" loop autoplay></audio>
+<audio id="spawn-sound" src="assets/spawn-in.mp3"></audio>
+
+<audio id="ui-click" src="assets/unlock.mp3"></audio>
+<audio id="fragment-pick" src="assets/ding.mp3"></audio>
+
+<script src="assets/js/script3.js"></script>
+
+</body>
+</html>

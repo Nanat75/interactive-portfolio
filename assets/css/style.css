@@ -1,0 +1,468 @@
+/* === PIXEL STYLE THEMED === */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* === BODY === */
+body {
+  margin: 0;
+  background: #ffe4f0 ;
+  font-family: 'Press Start 2P', cursive;
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 2000px;
+  image-rendering: pixelated;
+}
+
+/* === CHARACTER === */
+.character-girl {
+  position: absolute;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 250px;
+  height: 250px;
+  background-image: url('../css/img/your-sprite.webp');
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 9;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.character-girl.visible {
+  opacity: 1;
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+/* === DIALOGUE BOX === */
+.dialogue-box {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  background: #fff8fc;
+  border: 4px solid #000;
+  font-size: 0.6rem;
+  padding: 10px;
+  box-shadow: 4px 4px 0 #bd7b99;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  z-index: 10;
+}
+
+.dialogue-box.visible {
+  opacity: 1;
+}
+
+.dialogue-buttons button {
+  font-family: 'Press Start 2P', cursive;
+  background-color: #ffc0cb;
+  border: 2px solid #000;
+  padding: 8px 16px;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 #bd7b99;
+  font-size: 0.5rem;
+}
+
+.dialogue-buttons button:hover {
+  background-color: #ffe4ec;
+}
+
+/* === DOOR FRAME === */
+.door-frame {
+  width: 90vw;
+  height: 90vh;
+  max-width: 1200px;
+  max-height: 700px;
+  display: flex;
+  border: 4px solid #000;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 8px 8px 0 #bd7b99;
+  background: #fff0f5;
+  background: url('../css/img/livingroom.webp') no-repeat center center;
+  background-size: cover;
+  image-rendering: pixelated;
+}
+
+/* === DOORS === */
+.door {
+  width: 50%;
+  height: 100%;
+  background: #f7accf;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 1.5s ease-in-out;
+  position: relative;
+  box-shadow: inset -4px 0 #e697b4;
+  image-rendering: pixelated;
+}
+
+.left-door {
+  transform-origin: left center;
+  border-right: 2px dashed #000;
+}
+
+.right-door {
+  transform-origin: right center;
+  border-left: 2px dashed #000;
+  box-shadow: inset 4px 0 #e697b4;
+}
+
+/* === DOOR OPEN ANIMATION === */
+.open-left-door {
+  transform: rotateY(-100deg);
+}
+
+.open-right-door {
+  transform: rotateY(100deg);
+}
+
+
+/* === CENTER LOCK BUTTON === */
+.center-lock {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+}
+
+.lock-btn {
+  background-color: #ffc0cb;
+  border: 4px solid #000;
+  font-size: 1rem;
+  padding: 14px 20px;
+  color: #000;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 #bd7b99;
+  font-family: 'Press Start 2P', cursive;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  text-transform: uppercase;
+}
+
+.lock-btn:hover {
+  background-color: #ffdde8;
+  transform: scale(1.1);
+}
+
+.lock-btn.unlocked {
+  background-color: #caffd4;
+  box-shadow: none;
+  transform: scale(1.05);
+}
+
+/* === FLOWERS === */
+.flower {
+  width: 500x;
+  height: 500x;
+  position: absolute;
+  top: 5px;
+  filter: drop-shadow(2px 2px 0 #000);
+  image-rendering: pixelated;
+}
+
+.flower-left {
+  left: 5px;
+}
+
+.flower-right {
+  right: 5px;
+}
+
+
+/* === WINDOW === */
+.window {
+  width: 500px;
+  height: 500px;
+  background: linear-gradient(135deg, #fff 45%, #e6d5e8 50%, #ffeef5 100%);
+  border: 4px solid #000;
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: inset -2px -2px 0 #ffcce0, inset 2px 2px 0 #d18fa9;
+  image-rendering: pixelated;
+}
+
+.window:hover {
+  background: linear-gradient(135deg, #fff 40%, #e6d5e8 55%, #ffeef5 100%);
+  transition: background 0.3s ease;
+}
+
+.bottom-railing {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(400px); /* simulate bottom: -400px */
+  width: 85%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.bottom-railing img {
+  width: 100%;
+  height: auto;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 -1px 0 #000);
+}
+
+/* === DECORATIVE CAT & FLOWER POT === */
+
+.decor-cat {
+  position: absolute;
+  bottom: 40px;
+  right: 110px;
+  width: 350px;
+  image-rendering: pixelated;
+  z-index: 15;
+  filter: drop-shadow(2px 2px 0 #000);
+  pointer-events: none;
+}
+
+.bush {
+  position: absolute;
+  top: 350px;
+  width: 800px;
+  height: auto;
+  image-rendering: pixelated;
+  z-index: 4;
+  filter: drop-shadow(2px 2px 0 #000);
+  pointer-events: none;
+}
+
+.bush.left {
+  right: 85vw;
+}
+
+.bush.right {
+  left: 85vw;
+}
+
+.flower-vine {
+  width: 100px;
+  height: auto;
+  position: absolute;
+  top: 0; 
+  z-index: 3;
+  animation: sway 5s ease-in-out infinite;
+}
+
+.left-vine {
+  left: -50px; 
+}
+
+.right-vine {
+  right: 80px; 
+  transform: scaleX(-1); 
+}
+
+.flower-vine img {
+  height: 380px; 
+  pointer-events: none;
+}
+
+/* Swaying animation */
+@keyframes sway {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(1deg);
+  }
+}
+
+/* === BRANCH === */
+.branch {
+  position: absolute;
+  bottom: 0;
+  width: 100px;
+  height: 60px;
+  background: #d9a1c0;
+  z-index: 1;
+  animation: crawlBranch 5s infinite alternate ease-in-out;
+  image-rendering: pixelated;
+}
+
+.branch::before,
+.branch::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: #f0ffe3;
+  top: -8px;
+}
+
+.branch-left {
+  left: 0;
+}
+
+.branch-right {
+  right: 0;
+  transform: scaleX(-1);
+}
+
+@keyframes crawlBranch {
+  0% {
+    transform: rotate(0deg) scaleX(1);
+  }
+  100% {
+    transform: rotate(3deg) scaleX(1.05);
+  }
+}
+
+/* === F1 WRAPPER === */
+.f1-wrapper {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 1s ease 0.4s;
+}
+
+.door-frame.doors-open .f1-wrapper {
+  opacity: 1;
+}
+
+/* === LOADING SCREEN === */
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #fff0f5;
+  color: #5b3a29;
+  font-size: 0.75rem;
+  font-family: 'Press Start 2P', cursive;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  transition: opacity 0.8s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loading-screen.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.loading-text::after {
+  content: ' ⏳';
+  animation: dots 1.2s infinite;
+}
+
+@keyframes loadingDots {
+  0% { content: " "; }
+  33% { content: " ."; }
+  66% { content: " .."; }
+  100% { content: " ..."; }
+}
+.loading-text::after {
+  animation: loadingDots 1.2s steps(3) infinite;
+}
+/* === NEW YES LOADING SCREEN === */
+.yes-loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ffccdd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  font-size: 1rem;
+  color: #000;
+  font-family: 'Press Start 2P', cursive;
+  image-rendering: pixelated;
+}
+
+.yes-loading-screen.hidden {
+  display: none;
+}
+
+.yes-loading-text {
+  padding: 20px;
+  background: #fff0f5;
+  border: 4px solid #000;
+  box-shadow: 6px 6px 0 #bd7b99;
+  position: relative;
+}
+
+.yes-loading-text::after {
+  content: " ";
+  animation: loadingDots 1.2s steps(3, end) infinite;
+  display: inline-block;
+  margin-left: 0.3em;
+}
+
+@keyframes loadingDots {
+  0%   { content: " "; }
+  33%  { content: "."; }
+  66%  { content: ".."; }
+  100% { content: "..."; }
+}
+
+
+.sparkle {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, #fff5f9 40%, #ffc0cb 60%, transparent 80%);
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: float 4s infinite ease-in-out, twinkle 2s infinite ease-in-out;
+  z-index: 3;
+  pointer-events: none;
+  filter: drop-shadow(0 0 6px #ffd6e8) drop-shadow(0 0 10px #ffaed3);
+}
+
+.sparkle-top-left {
+  top: 40px;
+  left: 40px;
+}
+
+.sparkle-top-right {
+  top: 40px;
+  right: 40px;
+}
+
+.sparkle-bottom-left {
+  bottom: 40px;
+  left: 40px;
+}
+
+.sparkle-bottom-right {
+  bottom: 40px;
+  right: 40px;
+}
+
+@keyframes float {
+  0% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-12px) scale(1.15); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}

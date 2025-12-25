@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Nathasya's Pixel House</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="assets/css/skill.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+
+   <div id="scene">
+  <div id="game-container">
+
+    <!-- Background -->
+    <img id="room-bg" src="assets/css/img/kitchen.webp" alt="Kitchen Background">
+
+    <!-- Wall Text -->
+    <div id="wall-text">
+      <h1><span class="normal-text">Skill Section</span></h1>
+    </div>
+
+    <div id="messageBox" style="display:none; position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#fff0f8; color:#9c3d73; padding:12px 20px; border-radius:12px; border:2px dashed #f3b4d5; font-family:'Indie Flower', cursive; font-size:1.1rem; box-shadow:0 4px 12px rgba(0,0,0,0.2); z-index:999;">Message</div>
+
+    <div id="hint" class="interaction-hint"></div>
+
+    <!-- Sticky Note object in room -->
+<img id="sticky-note" src="assets/css/img/sticky note.webp" alt="Sticky Note" class="object sticky-note">
+
+<!-- Sticky Note Pop-Up -->
+<div id="sticky-note-popup" class="sticky-note-popup">
+  <div class="pixel-pin"></div>
+  <div class="note-inner">
+    <h3><i class="fa-solid fa-note-sticky"></i> Reminder Note</h3>
+    <div class="note-body">
+      <p> The door is still locked !</p>
+      <p>You must complete all tasks:</p>
+      <ul>
+        <li> Rinse your tools in the Sink</li>
+        <li> Bake all the pastry in the oven</li>
+        <li> Seal all jars in the Cabinet</li>
+        <li> Refresh all tools in the Fridge</li>
+      </ul>
+      <p>Then you'll be ready to go!</p>
+    </div>
+    <p class="close-hint-note">Press Z to close</p>
+  </div>
+</div>
+
+    <!-- Oven Furniture -->
+    <img id="oven" src="assets/css/img/smoke.webp" class="furniture" style="position:absolute; top:380px; left:560px; width: 100px;">
+
+    <!-- 🟡 Interaction Hint Box -->
+    <div id="hint"></div>
+
+    <!-- 🗨️ Dialogue Text -->
+    <div id="dialogueText"></div>
+
+<!-- 🍞 Oven Pop-Up UI -->
+<div id="oven-popup" class="oven-popup">
+  <div class="oven-inner">
+    <h2><i class="fa-solid fa-fire-burner"></i> Programming Pantry</h2>
+    <div class="pastry-tray">
+
+      <div class="pastry" data-baked="false" data-img-baked="assets/css/img/pastry_html.webp">
+        <img src="assets/css/img/dough1.webp" alt="HTML Dough">
+        <div class="info">
+          <span>HTML</span>
+          <div class="progress"><div class="fill" style="width: 95%;"></div></div>
+        </div>
+        <div class="baked-label">✔ Baked!</div>
+      </div>
+
+      <div class="pastry" data-baked="false" data-img-baked="assets/css/img/pastry_css.webp">
+        <img src="assets/css/img/dough2.webp" alt="CSS Dough">
+        <div class="info">
+          <span>CSS</span>
+          <div class="progress"><div class="fill" style="width: 90%;"></div></div>
+        </div>
+        <div class="baked-label">✔ Baked!</div>
+      </div>
+
+      <div class="pastry" data-baked="false" data-img-baked="assets/css/img/pastry_js.webp">
+        <img src="assets/css/img/dough3.webp" alt="JavaScript Dough">
+        <div class="info">
+          <span>JavaScript</span>
+          <div class="progress"><div class="fill" style="width: 75%;"></div></div>
+        </div>
+        <div class="baked-label">✔ Baked!</div>
+      </div>
+
+      <div class="pastry" data-baked="false" data-img-baked="assets/css/img/pastry_php.webp">
+        <img src="assets/css/img/dough4.webp" alt="PHP Dough">
+        <div class="info">
+          <span>PHP</span>
+          <div class="progress"><div class="fill" style="width: 60%;"></div></div>
+        </div>
+        <div class="baked-label">✔ Baked!</div>
+      </div>
+
+      <div class="pastry" data-baked="false" data-img-baked="assets/css/img/pastry_cpp.webp">
+        <img src="assets/css/img/dough5.webp" alt="C++ Dough">
+        <div class="info">
+          <span>C++</span>
+          <div class="progress"><div class="fill" style="width: 40%;"></div></div>
+        </div>
+        <div class="baked-label">✔ Baked!</div>
+      </div>
+
+    </div>
+    <p class="close-hint-oven">Press Z to close the oven</p>
+  </div>
+</div>
+
+<!-- sink Pop-Up UI -->
+<img id="sink" class="object sink" src="assets/css/img/transparent.webp" alt="Sink">
+
+<div id="sink-popup" class="sink-popup">
+  <div class="sink-inner">
+    <h2><i class="fa-solid fa-sink"></i> Sink Station: Rinse & Polish Your Tools!</h2>
+
+    <div class="sink-tools">
+
+      <!-- Laravel -->
+      <div class="tool" data-washed="false" data-skill="Laravel" data-level="80" data-clean-img="assets/css/img/laravel_clean.webp">
+        <div class="bubble-overlay"></div>
+        <img src="assets/css/img/laravel_dirty.webp" alt="Laravel">
+        <div class="tool-text">
+          <strong class="tool-name">Laravel</strong>
+          <div class="progress-bar-container">
+            <div class="progress-bar-fill" style="width: 0%;"></div>
+          </div>
+          <div class="wash-label">🫧 Needs Rinsing</div>
+        </div>
+      </div>
+
+      <!-- Bootstrap -->
+      <div class="tool" data-washed="false" data-skill="Bootstrap" data-level="60" data-clean-img="assets/css/img/bootstrap_clean.webp">
+        <div class="bubble-overlay"></div>
+        <img src="assets/css/img/bootstrap_dirty.webp" alt="Bootstrap">
+        <div class="tool-text">
+          <strong class="tool-name">Bootstrap</strong>
+          <div class="progress-bar-container">
+            <div class="progress-bar-fill" style="width: 0%;"></div>
+          </div>
+          <div class="wash-label">🫧 Needs Rinsing</div>
+        </div>
+      </div>
+
+      <!-- Android Studio -->
+      <div class="tool" data-washed="false" data-skill="Android Studio" data-level="45" data-clean-img="assets/css/img/android_clean.webp">
+        <div class="bubble-overlay"></div>
+        <img src="assets/css/img/android_dirty.webp" alt="Android Studio">
+        <div class="tool-text">
+          <strong class="tool-name">Android Studio</strong>
+          <div class="progress-bar-container">
+            <div class="progress-bar-fill" style="width: 0%;"></div>
+          </div>
+          <div class="wash-label">🫧 Needs Rinsing</div>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="close-hint-sink">Press Z to close the sink</p>
+  </div>
+</div>
+
+<!-- Cabinet Object -->
+<img id="cabinet" class="object cabinet" src="assets/css/img/transparent.webp" alt="Cabinet">
+
+<!-- Cabinet Popup UI -->
+<div id="cabinet-popup" class="cabinet-popup">
+  <div class="cabinet-inner">
+    <h2><i class="fa-solid fa-database"></i> Database Cabinet: Stored Knowledge</h2>
+
+    <div class="cabinet-shelves">
+
+      <!-- MySQL Jar -->
+      <div class="jar" data-label="MySQL" data-sealed="false" data-filled="75" data-clean-img="assets/css/img/mysql_jar.webp" data-dirty-img="assets/css/img/mysql_jar_leaky.webp">
+        <img src="assets/css/img/mysql_jar_leaky.webp" alt="MySQL">
+        <div class="jar-text">
+          <strong>MySQL</strong>
+          <div class="progress-bar-container-cabinet">
+            <div class="progress-bar-fill-cabinet" style="width: 75%;"></div>
+          </div>
+          <div class="seal-label">🔓 Unsealed</div>
+        </div>
+      </div>
+
+      <!-- PHP Jar -->
+      <div class="jar" data-label="PHP" data-sealed="false" data-filled="45" data-clean-img="assets/css/img/php_jar.webp" data-dirty-img="assets/css/img/php_jar_leaky.webp">
+        <img src="assets/css/img/php_jar_leaky.webp" alt="PHP">
+        <div class="jar-text">
+          <strong>PHP</strong>
+          <div class="progress-bar-container-cabinet">
+            <div class="progress-bar-fill-cabinet" style="width: 45%;"></div>
+          </div>
+          <div class="seal-label">🔓 Unsealed</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="close-hint-cabinet">Press Z to close the cabinet</p>
+  </div>
+</div>
+
+<!-- Fridge Object -->
+<img id="fridge" class="object fridge" src="assets/css/img/photo.webp" alt="fridge">
+<!-- Fridge Popup UI -->
+<div id="fridge-popup" class="fridge-popup">
+  <div class="fridge-inner">
+    <h2><i class="fa-solid fa-refrigerator"></i> Fridge Tools: Chill & Create</h2>
+
+    <div class="fridge-shelves">
+
+      <!-- Visual Studio Code -->
+      <div class="fridge-item" data-label="Visual Studio Code" data-used="false">
+        <img src="assets/css/img/vscode_can.webp" alt="VS Code">
+        <div class="cooldown-overlay"></div>
+        <div class="item-text">
+          <strong>Visual Studio Code</strong>
+          <div class="progress-bar-container-fridge">
+            <div class="progress-bar-fill-fridge" style="width: 90%;"></div>
+          </div>
+          <div class="use-label">🥶 Click to Refresh</div>
+        </div>
+      </div>
+
+      <!-- Canva -->
+      <div class="fridge-item" data-label="Canva" data-used="false">
+        <img src="assets/css/img/canva_icecream.webp" alt="Canva">
+        <div class="cooldown-overlay"></div>
+        <div class="item-text">
+          <strong>Canva</strong>
+          <div class="progress-bar-container-fridge">
+            <div class="progress-bar-fill-fridge" style="width: 85%;"></div>
+          </div>
+          <div class="use-label">🥶 Click to Refresh</div>
+        </div>
+      </div>
+
+      <!-- Figma -->
+      <div class="fridge-item" data-label="Figma" data-used="false">
+        <img src="assets/css/img/figma_popsicle.webp" alt="Figma">
+        <div class="cooldown-overlay"></div>
+        <div class="item-text">
+          <strong>Figma</strong>
+          <div class="progress-bar-container-fridge">
+            <div class="progress-bar-fill-fridge" style="width: 70%;"></div>
+          </div>
+          <div class="use-label">🥶 Click to Refresh</div>
+        </div>
+      </div>
+
+      <!-- Dev C++ -->
+      <div class="fridge-item" data-label="Dev C++" data-used="false">
+        <img src="assets/css/img/devc_soda.webp" alt="Dev C++">
+        <div class="cooldown-overlay"></div>
+        <div class="item-text">
+          <strong>Dev C++</strong>
+          <div class="progress-bar-container-fridge">
+            <div class="progress-bar-fill-fridge" style="width: 60%;"></div>
+          </div>
+         <div class="use-label">🥶 Click to Refresh</div>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="close-hint-fridge">Press Z to close the fridge</p>
+  </div>
+</div>
+
+    <!-- Back Button -->
+    <div class="back-home-wrapper">
+      <a href="home.html" class="back-home-btn">← Back to living room</a>
+    </div>
+
+    <!-- Player Sprite -->
+    <img id="player" src="assets/css/img/your-sprite.webp" alt="Player Character">
+
+  </div>
+</div>
+
+  <audio id="bg-music" src="assets/05. By Your Side.mp3" loop autoplay></audio>
+  <audio id="spawn-sound" src="assets/spawn-in.mp3"></audio>
+
+  <!-- Script -->
+  <script src="assets/js/script2.js"></script>
+</body>
+</html>

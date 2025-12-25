@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Oven Skill Test</title>
+  <style>
+    body {
+      margin: 0;
+      background: #fff8f9;
+      font-family: 'Press Start 2P', cursive;
+      overflow: hidden;
+    }
+
+    /* Simulated kitchen background */
+    #kitchen {
+      position: relative;
+      width: 800px;
+      height: 600px;
+      margin: 0 auto;
+      background: url('/assets/css/img/kitchen.png') no-repeat center;
+      background-size: contain;
+    }
+
+    /* 🔲 Transparent Oven Box */
+    #oven {
+      position: absolute;
+      left: 300px; /* adjust based on oven location */
+      top: 280px;
+      width: 100px;
+      height: 100px;
+      cursor: pointer;
+      z-index: 10;
+      background: rgba(255, 0, 0, 0.2); /* TEMP: red highlight to see area */
+    }
+
+    /* 💬 Interaction Hint */
+    #interaction-hint {
+      position: absolute;
+      top: 230px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 8px 16px;
+      background: #ffb6c1;
+      color: #4b2c3f;
+      border: 2px solid #aa6c82;
+      border-radius: 12px;
+      font-size: 8px;
+      font-family: 'Press Start 2P', cursive;
+      box-shadow: 0 0 10px rgba(255, 182, 193, 0.7);
+      z-index: 9999;
+      display: none;
+      pointer-events: none;
+    }
+
+    /* 🪄 Skill Popup */
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff0f5;
+      border: 3px solid #aa6c82;
+      padding: 20px;
+      z-index: 1000;
+      width: 300px;
+      font-family: 'Press Start 2P', cursive;
+      display: none;
+      box-shadow: 5px 5px 0 #d88da0;
+    }
+
+    .popup h2 {
+      font-size: 14px;
+      margin-bottom: 15px;
+      text-align: center;
+      color: #aa6c82;
+    }
+
+    .skill {
+      margin-bottom: 12px;
+    }
+
+    .skill span {
+      display: block;
+      font-size: 12px;
+      color: #aa6c82;
+      margin-bottom: 4px;
+    }
+
+    .bar {
+      height: 10px;
+      background-color: #ffc0cb;
+      border: 1px solid #aa6c82;
+      position: relative;
+    }
+
+    .bar::after {
+      content: '';
+      display: block;
+      height: 100%;
+      background-color: #aa6c82;
+    }
+
+    .bar.html::after { width: 95%; }
+    .bar.css::after { width: 90%; }
+    .bar.js::after { width: 80%; }
+    .bar.php::after { width: 75%; }
+    .bar.cpp::after { width: 60%; }
+
+    .popup button {
+      margin-top: 10px;
+      background: #aa6c82;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="kitchen">
+    <!-- Transparent Oven Area -->
+    <div id="oven" title="Click the oven!"></div>
+
+    <!-- Interaction Hint -->
+    <div id="interaction-hint">Press to view coding skills!</div>
+  </div>
+
+  <!-- Skill Popup -->
+  <div id="skill-popup" class="popup">
+    <h2>Coding Skills</h2>
+    <div class="skill"><span>HTML</span><div class="bar html"></div></div>
+    <div class="skill"><span>CSS</span><div class="bar css"></div></div>
+    <div class="skill"><span>JavaScript</span><div class="bar js"></div></div>
+    <div class="skill"><span>PHP</span><div class="bar php"></div></div>
+    <div class="skill"><span>C++</span><div class="bar cpp"></div></div>
+    <button onclick="closeSkills()">Close</button>
+  </div>
+
+  <script>
+    const oven = document.getElementById('oven');
+    const popup = document.getElementById('skill-popup');
+    const hint = document.getElementById('interaction-hint');
+
+    oven.addEventListener('click', () => {
+      popup.style.display = 'block';
+    });
+
+    function closeSkills() {
+      popup.style.display = 'none';
+    }
+
+    oven.addEventListener('mouseenter', () => {
+      hint.style.display = 'block';
+    });
+
+    oven.addEventListener('mouseleave', () => {
+      hint.style.display = 'none';
+    });
+  </script>
+</body>
+</html>

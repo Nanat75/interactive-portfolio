@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Nathasya's Pixel House</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="assets/css/contact.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+
+<div id="scene">
+  <div id="game-container">
+
+    <img id="room-bg" src="assets/css/img/bedroom.webp">
+
+     <div id="wall-text">
+  <h1><span class="normal-text">My Contact</span> <span class="highlight">Section</span></h1>
+</div>webp
+
+    <img id="player" src="assets/css/img/your-sprite.webp">
+
+      <!-- interactable -->
+    <img id="badge-drawer" class="interactable" src="assets/css/img/transparent.webp" style="left: 280px; top: 300px; width:80px; height: 80px;"/>
+      <img id="bed" class="interactable" src="assets/css/img/paper.webp" style="left: 600px; top: 450px; width:80px; height: auto;"/>
+       <img id="social-shelf" class="interactable" src="assets/css/img/sparkle.webp" style="right: 280px; top: 300px; width:80px; height: auto;"/>
+
+      <!-- Badge Pop out --> 
+    <div id="badge-popup" class="hidden">
+  <div class="badge-box">
+    <h2>"House Guest"</h2>
+
+    <img
+      src="assets/css/img/badge.webp"
+      class="badge-img"
+      alt="Pixel Explorer Badge"
+    />
+
+    <p>A small gift for exploring my work!</p>
+
+    <div class="badge-actions">
+      <a
+        href="assets/css/img/badge.png"
+        download
+        class="badge-btn"
+      >
+        Save Badge
+      </a>
+      <button id="close-badge" class="badge-btn secondary">
+        Close
+      </button>
+    </div>
+  </div>
+</div>
+
+    <!-- 🎉 ENTRY CONGRATS POPUP -->
+<div id="entry-popup" class="hidden">
+  <div class="entry-box">
+    <h2>🎉 You Made It! 🎉</h2>
+    <p>
+      Thank you for exploring my Portfolio 💗 <br>
+      Feel free to look around, leave a message, <br>
+      or collect a small gift before you go!
+    </p>
+
+    <div class="entry-actions">
+      <button id="explore-btn">Explore the Bedroom</button>
+      <button id="leave-btn">Leave</button>
+    </div>
+  </div>
+</div>
+
+<!-- Confetti Container -->
+<div id="confetti-container"></div>
+
+  <!-- Bed Pop out --> 
+<div id="bed-popup" class="letter-popup hidden">
+  <div class="letter-box">
+    <button class="letter-close-btn">Close</button>
+
+    <h2 class="letter-title">A Small Message</h2>
+    <p class="letter-sub">
+      You can leave a note here.<br>
+      I’ll read it quietly.
+    </p>
+
+  <form
+  action="https://formspree.io/f/mrezkbvq"
+  method="POST"
+  class="letter-form"
+>
+  <input type="hidden" name="_subject" value="New Message from Pixel House">
+
+  <input type="text" name="name" placeholder="Your name" required />
+  <input type="email" name="email" placeholder="Your email" required />
+  <textarea name="message" placeholder="Write your message..." required></textarea>
+
+  <button type="submit" class="letter-send">Send Message</button>
+</form>
+
+    <p class="letter-thanks hidden">
+      💗 Thank you for your message<br>
+      I’ll read it carefully.
+    </p>
+  </div>
+</div>
+
+  <!-- Social Pop out -->
+<div id="social-popup" class="social-popup hidden">
+  <div class="social-box">
+    <button id="close-social" class="social-close">✕</button>
+
+<h2 class="social-title">🎀 My Little Space 🎀</h2>
+<p class="social-sub">These are places you can find me!</p>
+
+    <div class="social-list">
+      <a href="https://instagram.com/ryx_loll" target="_blank" class="social-item">
+        <img src="assets/css/icons/instagram.jpg" alt="">
+        <span>Instagram</span>
+      </a>
+
+      <a href="https://wa.me/62895374793742" target="_blank" class="social-item">
+        <img src="assets/css/icons/whatsapp.jpg" alt="">
+        <span>WhatsApp</span>
+      </a>
+
+      <a href="mailto:lucas.lol6996@gmail.com" class="social-item">
+        <img src="assets/css/icons/email.jpg" alt="">
+        <span>Email</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+  <!-- Exit Pop out -->
+<div id="exit-popup" class="exit-popup hidden">
+  <div class="exit-box">
+    <div class="exit-header">
+      <h2 class="exit-title">You Found the Exit!</h2>
+      <div class="door-knob"></div>
+    </div>
+
+    <p class="exit-text">
+      Thanks for taking the time to explore my room.<br>
+      Would you like to leave now,<br>
+      or stay for a bit longer?
+    </p>
+
+    <div class="exit-actions">
+      <button id="exit-leave" class="exit-btn primary">Leave Room</button>
+      <button id="exit-stay" class="exit-btn secondary">Stay</button>
+    </div>
+
+    <p class="exit-note">You can always come back.</p>
+  </div>
+</div>
+
+
+   <div class="back-home-wrapper">
+    <a href="projects.html" class="back-home-btn">← Back to workshop</a>
+  </div>
+
+<div id="hint" style="
+  position:absolute;
+  display:none;
+  z-index:999;
+  pointer-events:none;
+  transform: translateY(-4px);
+">
+
+  <div id="hint-box" style="
+    background:linear-gradient(180deg, #ffffff, #ffffff);
+    color:#6b3b4d;
+    padding:6px 10px;
+    border:2px solid #f2b6cf;
+    border-radius:6px;
+    font-size:10px;
+    font-family:'Press Start 2P', monospace;
+    box-shadow:
+      0 0 0 1px #fff,
+      0 3px 0 #f2b6cf,
+      0 4px 6px rgba(255, 210, 140, 0.3);
+    width:max-content;
+    line-height:1.4;
+  ">
+  </div>
+
+</div>
+
+
+  </div>
+</div>
+
+  <audio id="bg-music" src="assets/05. By Your Side.mp3" loop autoplay></audio>
+  <audio id="spawn-sound" src="assets/spawn-in.mp3"></audio>
+  <audio id="ui-click" src="assets/unlock.mp3"></audio>
+  <audio id="badge-sound" src="assets/badge.mp3"></audio>
+  <audio id="paper-sound" src="assets/paper.mp3"></audio>
+  <audio id="drawer-sound" src="assets/drawer.mp3"></audio>
+  <audio id="transition" src="assets/transition.mp3"></audio>
+
+<script src="assets/js/script4.js"></script>
+
+</body>
+</html>
