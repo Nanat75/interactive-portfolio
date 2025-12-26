@@ -44,24 +44,24 @@ The goal?
 
 ## 🗺️ Rooms & Interactions
 
-- 🛋️ **Living Room** — Welcome note & intro  
-- 📺 **TV** — Home Section & fun facts  
-- 📓 **Diary** — About me 
-- 🍰 **Kitchen** — Skills as a mini-game  
-- 🧰 **Workshop** — Projects  
-- 🌿 **Shelf + Plant** — Social media links  
-- 🚪 **Exit Door** — Choice-based ending  
+| Room | Purpose |
+|------|---------|
+| 🚪 **Start Door** | Entry point & introduction to the portfolio |
+| 🛋️ **Living Room** | Welcome note, Home section, and About Me |
+| 🍰 **Kitchen** | Skills presented as a playful mini-game |
+| 🧰 **Workshop** | Featured projects & experiments |
+| 🌿 **Bed** | Contact section and exit choice |
+
+>  Explore freely, interact with objects, and uncover content naturally.
 
 ---
-
-## 🧠 Tech & Tools Used
 
 ### - Frontend
 <p>
   <img src="https://skillicons.dev/icons?i=html,css,js" />
 </p>
 
-### - Design
+### - Design & Creative Tools
 <p>
   <img src="https://skillicons.dev/icons?i=figma" />
   <img src="https://1000logos.net/wp-content/uploads/2023/02/Canva-logo.png" height="48"/>
@@ -76,23 +76,6 @@ The goal?
 👉  https://nanat75.github.io/interactive-portfolio/
 
 *(Best experienced on desktop with sound on 🎧)*
-
----
-
-## 💌 Contact Me
-<p align="center">
-  <a href="https://wa.me/62XXXXXXXXXX">
-    <img src="https://i.pinimg.com/474x/a2/33/e8/a233e87405ca456be61b01983c55d74b.jpg" height="48" />
-  </a>
-  &nbsp;&nbsp;
-  <a href="https://instagram.com/yourusername">
-    <img src="https://skillicons.dev/icons?i=instagram" height="48" />
-  </a>
-  &nbsp;&nbsp;
-  <a href="mailto:yourusername@gmail.com">
-    <img src="https://skillicons.dev/icons?i=gmail" height="48" />
-  </a>
-</p>
 
 ---
 
