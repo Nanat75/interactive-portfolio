@@ -46,10 +46,11 @@ function playSound(id) {
   sound.play().catch(() => {});
 }
 
-// Background music
+// Play background music on page load
 window.addEventListener("load", () => {
-  music.volume = 0.4; // ✅ FIXED
-  music.play().catch(() => {});
+  const music = document.getElementById("bg-music");
+  music.volume = 5;
+  music.play().catch(() => {}); // prevent autoplay error
 });
 
 // ---------------- SPAWN ----------------
