@@ -83,3 +83,5 @@ The goal?
   <i>Thanks for exploring my little pixel room 🌷</i><br>
   <i>Feel free to stay… or come back anytime.</i>
 </p>
+
+---
